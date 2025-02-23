@@ -12,7 +12,7 @@ jobs:
           sudo apt install -y jq
       - name: Get latest Fennec release version
         run: |
-          version=$(curl -s https://f-droid.org/repo/index-v1.json | jq -r '(first(.packages."org.mozilla.fennec_fdroid".[] | select(.nativecode[] | contains("arm64-v8a")))) as $newestVersion | $newestVersion.versionName + "-" + ($newestVersion.versionCode | tostring)')
+          version=$(curl -s https://f-droid.org/repo/index-v1.json | jq -r '.packages."org.mozilla.fennec_fdroid" | map(select(any(.nativecode[]; . == "arm64-v8a"))) | max_by(.versionCode) | .versionName + "-" + (.versionCode | tostring)')
           echo "BUILD_VERSION=$version" >> $GITHUB_ENV
       - name: Install build dependencies
         run: |
