@@ -1,14 +1,13 @@
 #!/bin/bash
-data=$(curl -s https://fdroid.ironfoxoss.org/fdroid/repo/index-v1.json)
-apk=$(echo $data | jq -r '.packages."org.ironfoxoss.ironfox"[0].apkName')
-wget -q $(echo "https://fdroid.ironfoxoss.org/fdroid/repo/$apk") -O latest.apk
+apk=$(curl -s https://f-droid.org/repo/index-v1.json | jq -r '.packages."org.mozilla.fennec_fdroid"[0].apkName')
+wget -q "https://fdroid.org/repo/$apk" -O latest.apk
 
 wget -q https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.11.0.jar -O apktool.jar
 wget -q https://raw.githubusercontent.com/iBotPeaches/Apktool/master/scripts/linux/apktool
 chmod +x apktool*
 
 rm -rf patched patched_signed.apk
-./apktool d -s latest.apk -o patched 
+./apktool d -s latest.apk -o patched
 rm -rf patched/META-INF
 
 sed -i 's/<color name="fx_mobile_layer_color_1">.*/<color name="fx_mobile_layer_color_1">@color\/photonBlack<\/color>/g' patched/res/values-night/colors.xml
