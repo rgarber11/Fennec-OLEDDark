@@ -12,7 +12,8 @@ jobs:
           sudo apt install -y jq
       - name: Get latest Fennec release version
         run: |
-          echo "BUILD_VERSION=$(curl -s https://f-droid.org/api/v1/packages/org.mozilla.fennec_fdroid | jq -r '.packages[0].versionName + "-" + (.packages[0].versionCode|tostring)')" >> $GITHUB_ENV
+          version=$(curl -s https://f-droid.org/api/v1/packages/org.mozilla.fennec_fdroid | jq -r '(first(.packages."org.mozilla.fennec_fdroid".[] | select(.nativecode[] | contains("arm64-v8a")))) as $newestVersion | $newestVersion.versionName + "-" + ($newestVersion.versionCode | tostring)')
+          echo "BUILD_VERSION=$version" >> $GITHUB_ENV
       - name: Install build dependencies
         run: |
           sudo apt update

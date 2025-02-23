@@ -1,5 +1,5 @@
 #!/bin/bash
-apk=$(curl -s https://f-droid.org/repo/index-v1.json | jq -r '.packages."org.mozilla.fennec_fdroid"[0].apkName')
+apk=$(curl -s https://f-droid.org/repo/index-v1.json | jq -r 'first(.packages."org.mozilla.fennec_fdroid".[] | select(.nativecode[] | contains("arm64-v8a"))).apkName')
 wget -q "https://fdroid.org/repo/$apk" -O latest.apk
 
 wget -q https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.11.0.jar -O apktool.jar
