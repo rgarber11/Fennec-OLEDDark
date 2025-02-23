@@ -4,7 +4,7 @@ Shamelessly copied from [Ironfox-OLEDDark](https://github.com/ArtikusHG/Ironfox-
 
 # How does this work?
 
-As Building the entire browser from source just to change two lines in the XML would be silly, this repo (and ArtikusHG's repo) just edits the values of colors to be Black rather than gray. (Note: if someone who can navigate Firefox's repo could tell me how to change the Private Browsing to be darker, I'd be grateful.)
+As building the entire browser from source just to change two lines in the XML would be silly, this repo (and ArtikusHG's repo) just edits the values of colors to be black rather than gray. (Note: if someone who can navigate Firefox's repo could tell me how to change the Private Browsing to be darker, I'd be grateful.)
 
 # How to use
 
