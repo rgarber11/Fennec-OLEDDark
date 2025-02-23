@@ -22,7 +22,7 @@ jobs:
           sudo apt install -y jq
       - name: Get latest Fennec release version
         run: |
-          version=$(curl -s https://f-droid.org/api/v1/packages/org.mozilla.fennec_fdroid | jq -r '(first(.packages."org.mozilla.fennec_fdroid".[] | select(.nativecode[] | contains("arm64-v8a")))) as $newestVersion | $newestVersion.versionName + "-" + ($newestVersion.versionCode | tostring)')
+          version=$(curl -s https://f-droid.org/repo/index-v1.json | jq -r '(first(.packages."org.mozilla.fennec_fdroid".[] | select(.nativecode[] | contains("arm64-v8a")))) as $newestVersion | $newestVersion.versionName + "-" + ($newestVersion.versionCode | tostring)')
           echo "BUILD_VERSION=$version" >> $GITHUB_ENV
       - name: Check if latest version was already built
         if: ${{ steps.getLatest.outputs.tag_name == env.BUILD_VERSION }}
