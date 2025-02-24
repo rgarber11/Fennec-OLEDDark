@@ -16,10 +16,6 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           latest: true
-      - name: Install dependencies
-        run: |
-          sudo apt update
-          sudo apt install -y jq
       - name: Get latest Fennec release version
         run: |
           version=$(curl -s https://f-droid.org/repo/index-v1.json | jq -r '.packages."org.mozilla.fennec_fdroid" | map(select(any(.nativecode[]; . == "arm64-v8a"))) | max_by(.versionCode) | .versionName + "-" + (.versionCode | tostring)')
