@@ -2,7 +2,7 @@
 apk=$(curl -s https://f-droid.org/repo/index-v1.json | jq -r '.packages."org.mozilla.fennec_fdroid" | map(select(any(.nativecode[]; . == "arm64-v8a"))) | max_by(.versionCode).apkName')
 wget -q "https://fdroid.org/repo/$apk" -O latest.apk
 
-wget -q https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.11.0.jar -O apktool.jar
+wget -q https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.11.1.jar -O apktool.jar
 wget -q https://raw.githubusercontent.com/iBotPeaches/Apktool/master/scripts/linux/apktool
 chmod +x apktool*
 
@@ -16,6 +16,7 @@ sed -i 's/<color name="fx_mobile_layer_color_2">.*/<color name="fx_mobile_layer_
 sed -i -z 's/.mozac-readerview-body.dark {\n  background-color: #1c1b22;/.mozac-readerview-body.dark {\n  background-color: #000000;/g' patched/assets/extensions/readerview/readerview.css
 
 # Adding in OLED Tab from https://github.com/ArtikusHG/Ironfox-OLEDDark/issues/6#issuecomment-2613716936
+sed -i 's/ff1c1b22/ff000000/g' patched/smali_classes2/mozilla/components/ui/colors/PhotonColors.smali
 sed -i 's/ff2b2a33/ff000000/g' patched/smali_classes2/mozilla/components/ui/colors/PhotonColors.smali
 sed -i 's/ff42414d/ff15141a/g' patched/smali_classes2/mozilla/components/ui/colors/PhotonColors.smali
 sed -i 's/ff52525e/ff15141a/g' patched/smali_classes2/mozilla/components/ui/colors/PhotonColors.smali
