@@ -22,7 +22,7 @@ sed -i 's/ff2b2a33/ff000000/g' "$loc"
 sed -i 's/ff42414d/ff15141a/g' "$loc"
 sed -i 's/ff52525e/ff15141a/g' "$loc"
 
-./apktool b patched -o patched.apk --use-aapt2
+./apktool b patched -o patched.apk
 
 zipalign 4 patched.apk patched_signed.apk
 rm -rf patched patched.apk
