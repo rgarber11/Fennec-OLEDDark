@@ -19,6 +19,13 @@ sed -i 's/ff1c1b22/ff000000/g' "$loc"
 sed -i 's/ff2b2a33/ff000000/g' "$loc"
 sed -i 's/ff42414d/ff15141a/g' "$loc"
 sed -i 's/ff52525e/ff15141a/g' "$loc"
+
+nova=$(find ./patched -name "NovaColors.smali" -type f -print -quit)
+sed -i 's/ff1d1b1f/ff000000/g' "$nova"
+sed -i 's/ff171519/ff000000/g' "$nova"
+sed -i 's/ff131215/ff000000/g' "$nova"
+sed -i 's/ff252428/ff15141a/g' "$nova"
+sed -i 's/ff312f33/ff15141a/g' "$nova"
 sed -i 's/mipmap\/ic_launcher_round/drawable\/ic_launcher_foreground/g' patched/res/drawable/splash_screen.xml
 sed -i 's/160\.0dip/200\.0dip/g' patched/res/drawable/splash_screen.xml
 ./apktool b patched -o patched.apk
